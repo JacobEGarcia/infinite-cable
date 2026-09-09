@@ -1,0 +1,88 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { height:100%; background:#0a0a0f; overflow:hidden;
+  font-family:'Space Mono',monospace; color:#cfe8ff;
+  background-image:radial-gradient(ellipse at 50% 30%, #141428 0%, #06060c 70%); }
+#stage { display:flex; height:100%; width:100%; align-items:center; justify-content:center; gap:24px; flex-wrap:wrap; padding:12px; }
+
+/* ---------- TV ---------- */
+#tv { position:relative; width:min(78vw, calc((100vh - 40px) * 1.34)); aspect-ratio:4/3;
+  background:linear-gradient(145deg,#3a3a44,#191920 60%,#2a2a33);
+  border-radius:26px; padding:3.2% 3.2% 9% 3.2%;
+  box-shadow:0 0 60px rgba(80,120,255,.15), inset 0 2px 2px rgba(255,255,255,.15), inset 0 -6px 14px rgba(0,0,0,.7), 0 18px 50px rgba(0,0,0,.8); }
+#bezel { position:relative; width:100%; height:100%; background:#000; border-radius:14px; overflow:hidden;
+  box-shadow:inset 0 0 30px #000; }
+#screen { width:100%; height:100%; display:block; background:#000;
+  filter:saturate(1.15) contrast(1.08); }
+#glass { position:absolute; inset:0; pointer-events:none; border-radius:14px;
+  background:
+    repeating-linear-gradient(0deg, rgba(0,0,0,.22) 0px, rgba(0,0,0,.22) 1px, transparent 1px, transparent 3px),
+    radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.55) 100%);
+  animation:flicker 4s infinite steps(1); }
+#glass::after { content:''; position:absolute; inset:0;
+  background:linear-gradient(115deg, rgba(255,255,255,.10) 0%, transparent 22%, transparent 78%, rgba(255,255,255,.05) 100%); }
+@keyframes flicker { 0%,100%{opacity:1} 50%{opacity:.985} 51%{opacity:1} 73%{opacity:.97} 74%{opacity:1} }
+
+#led { position:absolute; bottom:3%; right:6%; width:12px; height:12px; border-radius:50%;
+  background:#ff3344; box-shadow:0 0 10px #ff3344; }
+#led.on { background:#39ff88; box-shadow:0 0 10px #39ff88; }
+#brand { position:absolute; bottom:2.6%; left:6%; font-size:clamp(9px,1.2vw,14px); letter-spacing:3px; color:#889; }
+
+/* ---------- OSD ---------- */
+#osd { position:absolute; top:5%; left:5%; pointer-events:none; opacity:0; transition:opacity .4s;
+  text-shadow:2px 2px 0 #000, -1px -1px 0 #000; }
+#osd.show { opacity:1; }
+#osd .ch { font-size:clamp(20px,3.4vw,44px); font-weight:bold; color:#aef; }
+#osd .title { font-size:clamp(12px,1.7vw,22px); color:#fff; margin-top:4px; }
+#osd .meta { font-size:clamp(9px,1.2vw,15px); color:#8fb; margin-top:2px; }
+#banner { position:absolute; bottom:6%; left:5%; right:5%; pointer-events:none; opacity:0; transition:opacity .4s;
+  background:rgba(0,10,30,.72); border:1px solid #39f; border-radius:6px; padding:8px 12px; font-size:clamp(10px,1.4vw,17px); }
+#banner.show { opacity:1; }
+#banner .t { color:#aef; font-weight:bold; }
+#banner .d { color:#9ab; font-size:.85em; }
+
+/* ---------- guide ---------- */
+#guide { position:absolute; inset:8% 6%; background:rgba(2,8,20,.93); border:2px solid #246; border-radius:8px;
+  padding:14px 18px; display:none; overflow:hidden; font-size:clamp(9px,1.25vw,15px); }
+#guide.show { display:block; }
+#guide h2 { color:#7df; letter-spacing:2px; margin-bottom:8px; font-size:1.3em; }
+#guide table { width:100%; border-collapse:collapse; }
+#guide td { padding:3px 6px; border-bottom:1px solid #123; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:0; }
+#guide tr.cur td { background:#134; color:#aef; }
+#guide .c { color:#5af; width:12%; }
+#guide .tm { color:#687; width:16%; }
+
+/* ---------- remote ---------- */
+#remote { width:150px; background:linear-gradient(160deg,#2c2c36,#15151c); border-radius:18px; padding:16px 12px;
+  box-shadow:0 12px 30px rgba(0,0,0,.7), inset 0 1px 1px rgba(255,255,255,.12);
+  display:grid; grid-template-columns:repeat(3,1fr); gap:8px; align-self:center; user-select:none; }
+#remote .lbl { grid-column:1/4; text-align:center; font-size:10px; letter-spacing:2px; color:#789; }
+#remote button { aspect-ratio:1.25; border:none; border-radius:8px; background:#33333f; color:#cde;
+  font-family:inherit; font-size:11px; cursor:pointer;
+  box-shadow:0 3px 0 #101016, inset 0 1px 1px rgba(255,255,255,.15); }
+#remote button:active { transform:translateY(2px); box-shadow:0 1px 0 #101016; background:#3e3e4d; }
+#remote button.wide { grid-column:1/4; aspect-ratio:auto; padding:8px 0; }
+#remote button.pwr { background:#5a2030; color:#f9a; }
+#remote button.pwr:active { background:#72303f; }
+#hint { position:fixed; bottom:10px; left:0; right:0; text-align:center; font-size:11px; color:#456; letter-spacing:1px; }
+@media (max-width:760px){ #stage{gap:10px} #remote{width:128px} }
+
+/* ---------- v3: TV mode (casting / always-on) ---------- */
+body.tvmode { background:#000; background-image:none; }
+body.tvmode #stage { padding:0; gap:0; }
+body.tvmode #remote, body.tvmode #hint { display:none; }
+body.tvmode #tv { width:100vw; height:100vh; aspect-ratio:auto; border-radius:0; padding:0;
+  background:#000; box-shadow:none; }
+body.tvmode #bezel { border-radius:0; }
+body.tvmode #screen { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
+body.tvmode #glass { border-radius:0; }
+body.tvmode #brand, body.tvmode #led { display:none; }
+#tvhint { position:fixed; bottom:14px; left:0; right:0; text-align:center; font-size:12px;
+  color:#9ab; letter-spacing:1px; display:none; text-shadow:1px 1px 0 #000; z-index:50; }
+body.tvmode #tvhint.on { display:block; }
+
+/* ---------- v3: guide grid ---------- */
+#guide tr.hdr td { color:#5af; font-weight:bold; border-bottom:1px solid #2af; }
+#guide td.net { color:#7a9; width:22%; }
+#guide td .ep { color:#8fb; }
+#guide tr[data-ch] { cursor:pointer; }
+#guide tr[data-ch]:hover td { background:#0d2b4d; }
