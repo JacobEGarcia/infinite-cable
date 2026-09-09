@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INFINITE CABLE - TV from every dimension</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+  <div id="tv">
+    <div id="bezel">
+      <canvas id="screen" width="640" height="480"></canvas>
+      <div id="osd"><div class="ch"></div><div class="title"></div><div class="meta"></div></div>
+      <div id="banner"><div class="t"></div><div class="d"></div></div>
+      <div id="guide"><h2>PROGRAM GUIDE</h2><table></table></div>
+      <div id="glass"></div>
+    </div>
+    <div id="brand">INFINITE&trade; CABLE</div>
+    <div id="led" class="on"></div>
+  </div>
+  <div id="remote">
+    <div class="lbl">UNIVERSAL REMOTE</div>
+    <button class="pwr" data-k="power">PWR</button>
+    <button data-k="surf">SURF</button>
+    <button data-k="mute">MUTE</button>
+    <button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button>
+    <button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button>
+    <button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button>
+    <button data-k="guide">GUIDE</button><button data-k="0">0</button><button data-k="random">RAND</button>
+    <button class="wide" data-k="chup">CH +</button>
+    <button class="wide" data-k="chdn">CH -</button>
+    <button data-k="volup">VOL+</button><button data-k="back">BACK</button><button data-k="voldn">VOL-</button>
+    <button class="wide" data-k="tv">TV MODE</button>
+    <button class="wide" data-k="full">FULLSCREEN</button>
+  </div>
+</div>
+<div id="hint">arrows = channel/volume &nbsp;&middot;&nbsp; digits = direct channel &nbsp;&middot;&nbsp; G = guide &nbsp;&middot;&nbsp; S = surf &nbsp;&middot;&nbsp; T = tv mode &nbsp;&middot;&nbsp; F = fullscreen &nbsp;&middot;&nbsp; M = mute &nbsp;&middot;&nbsp; click anywhere for sound</div>
+<div id="tvhint">click screen = CH + &nbsp;&middot;&nbsp; G = guide &nbsp;&middot;&nbsp; M = mute &nbsp;&middot;&nbsp; F = fullscreen &nbsp;&middot;&nbsp; T = exit tv mode</div>
+<script src="app.js"></script>
+</body>
+</html>
